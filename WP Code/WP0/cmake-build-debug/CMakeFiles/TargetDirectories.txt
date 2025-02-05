@@ -1,0 +1,3 @@
+/Users/fredriknilsson/Desktop/Software Engineering and Management/SEM Termin 4/DIT633 Development of Emebbed and Real-Time System/Embedded System C Code/WP Code/WP0/cmake-build-debug/CMakeFiles/WP0.dir
+/Users/fredriknilsson/Desktop/Software Engineering and Management/SEM Termin 4/DIT633 Development of Emebbed and Real-Time System/Embedded System C Code/WP Code/WP0/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/fredriknilsson/Desktop/Software Engineering and Management/SEM Termin 4/DIT633 Development of Emebbed and Real-Time System/Embedded System C Code/WP Code/WP0/cmake-build-debug/CMakeFiles/rebuild_cache.dir
