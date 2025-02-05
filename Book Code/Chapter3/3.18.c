@@ -24,9 +24,44 @@ new balance and message "Credit limit exceeded."
 int main () {
 
 
+int accountNumber = 0;
+double beginningBalance = 0;
+double totalCharges = 0;
+double credits = 0;
+double creditLimit = 0;
 
 
+    while (accountNumber != -1) {
 
+      printf("Enter account number (-1 to end): \n");
+      scanf("%d", &accountNumber);
 
+      if (accountNumber == -1) {
+        break;
+      }
+
+      printf("Enter the beginning balance: \n");
+      scanf("%lf", &beginningBalance);
+
+      printf("Enter the total charges: \n");
+      scanf("%lf", &totalCharges);
+
+      printf("Enter the total credits: \n");
+      scanf("%lf", &credits);
+
+      printf("Enter credit limit: \n");
+      scanf("%lf", &creditLimit);
+
+      printf("Account:\t%d\n", accountNumber);
+      printf("Credit Limit: %.2lf\n", creditLimit);
+
+      double balance = beginningBalance + totalCharges - credits;
+
+      printf("Balance:\t%.2lf\n", balance);
+
+      if (balance > creditLimit) {
+        printf("Credit Limit Exceeded.\n");
+      }
+    }
   return 0;
 }
