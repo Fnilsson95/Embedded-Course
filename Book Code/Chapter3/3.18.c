@@ -16,8 +16,8 @@ The program should input each of these facts, calculate the new balance (= begin
 determine if the new balance exceeds the customer's credit limit.
 For those customers whose credit limit is exceeded, the program should display the customer's account number, credit limit,
 new balance and message "Credit limit exceeded."
-
  */
+
 #include <stdio.h>
 
 // Define constants
@@ -28,6 +28,9 @@ new balance and message "Credit limit exceeded."
 #define MAX_LIMIT 10000
 #define MAX_START_BALANCE 100000
 
+// Starting point of the program
+// Program works as a simple "banking" system,
+// controlling if the user has exceeded their credit limit or not
 int main () {
 
 // Initialize variables
@@ -45,51 +48,60 @@ double creditLimit = 0;
       printf("Enter account number (-1 to end): \n");
       scanf("%d", &accountNumber);
 
+      // If user enters -1, break
       if (accountNumber == -1) {
         break;
       }
 
+      // Validation for accountNumber being within valid range
       if (accountNumber < MIN_ACCOUNT || accountNumber > MAX_ACCOUNT) {
         printf("Invalid input. Please provide an integer between 1 and 100\n");
-        continue;
+        continue; // Restart while-loop
       }
 
 
       printf("Enter the beginning balance: \n");
+      // Validate that input is correct type and within correct ranges
       if (scanf("%lf", &beginningBalance) != 1 || beginningBalance < MINIMUM || beginningBalance > MAX_START_BALANCE) {
         printf("Invalid input. please provide an integer between %d and %d\n", MINIMUM, MAX_START_BALANCE);
-        continue;
+        continue; // Restart while-loop
       }
 
       printf("Enter the total charges: \n");
+      // Validate that input is correct type and within correct ranges
       if (scanf("%lf", &totalCharges) != 1 || totalCharges < MINIMUM || totalCharges > MAX_CHARGES) {
         printf("Invalid charge amount. Values are at most between %d and %d\n", MINIMUM, MAX_CHARGES);
-        continue;
+        continue; // Restart while-loop
       }
 
 
       printf("Enter the total credits: \n");
+      // Validate that input is correct type and within correct ranges
       if (scanf("%lf", &credits) != 1 || credits < MINIMUM) {
         printf("Invalid input. Must be minimum %d\n", MINIMUM);
-        continue;
+        continue; // Restart while-loop
       }
 
       printf("Enter credit limit: \n");
+      // Validate that input is correct type and within correct ranges
       if (scanf("%lf", &creditLimit) != 1 || creditLimit < MINIMUM || creditLimit > MAX_LIMIT) {
         printf("Invalit limit amount. Please provide input between %d and %d", MINIMUM, MAX_LIMIT);
-        continue;
+        continue; // Restart while-loop
       }
 
-      printf("Account:\t%d\n", accountNumber);
-      printf("Credit Limit: %.2lf\n", creditLimit);
-
+      // Calculate balance from user input
       double balance = beginningBalance + totalCharges - credits;
 
+      // Print user submission
+      printf("Account:\t%d\n", accountNumber);
+      printf("Credit Limit: %.2lf\n", creditLimit);
       printf("Balance:\t%.2lf\n", balance);
 
+      // If balance is exceeding creditLimit
       if (balance > creditLimit) {
         printf("Credit Limit Exceeded.\n");
       }
     }
+  // Successful exit status of program
   return 0;
 }
