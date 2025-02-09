@@ -1,14 +1,13 @@
 #include <stdio.h> 
 #include <ctype.h>
 
+
+// TODO
+// Initialize with malloc and pointers
+
+// Define coordinate constants
 #define MAX_COORDINATES 99
 #define MIN_COORDINATES 0
-
-
-// Instructions from user, provided as a string, read one by one --> array of chars
-// When all instructions are done, it prints out the position of the robot. 
-// Then asks for a new starting position and the string of characters
-// Program repeats until encounting a end character --> While loop 
 
 // Define enumerations of directions in a clockwise rotation. 
 enum DIRECTION {
@@ -26,9 +25,13 @@ typedef struct {
 } ROBOT; 
 
 // Function prototypes
+// Function prototypes must be declared AFTER defining ROBOT struct, otherwise it doesn't work to pass
+// a pointer in the function argument as it can't find it
 void move(ROBOT *robot);
 void turn(ROBOT *robot);
 
+// Starting point of program
+// Program is a control system for a robot, moving or turning it in a coordinate system.
 int main () {
 
     // Declare a variable named "robot" of type ROBOT
@@ -40,15 +43,12 @@ int main () {
     // Set the initial starting direction of the robot
     robot.dir = N;
 
-    // Initialize where we store the character values, string
-    // Initialize a end of character char
-    // Initialize a while loop.
-
-    // Initialize with pointer and malloc after
+    // Initialize variables to control the program
     char inputInstructions[100];
     char playCharacter = 'p';
 
 
+    // While-loop to run while end-of-character 'q' is not input
     while (playCharacter != 'q') {
 
         // Prompt user for input coordinates
@@ -61,11 +61,12 @@ int main () {
             continue;
         }
 
+        // Prompt user for robot instructions
         printf("Enter the move instructions for robot (m = move, t = turn and q = quit)\n");
         scanf("%s", inputInstructions);
 
         // Validate that only characters have been input
-        // isalpha
+        // isalpha to check if alphabetical letters
         int valid = 1;
         for (int i = 0; inputInstructions[i] != '\0'; i++) {
             if(!isalpha(inputInstructions[i])) {
@@ -73,7 +74,7 @@ int main () {
                 break;
             }
         }
-
+        // If not valid, restart program
         if(!valid) {
             printf("Error. Only input letters. (m, t or q)\n");
             continue;
@@ -98,12 +99,14 @@ int main () {
             }
         }
 
-     
+
+        // Print the final position/direction of robot
         printf("The final position of the robot is x position: %d, and y position: %d\n", robot.xpos, robot.ypos);
         printf("The final direction of the robot is: %s\n", directionNames[robot.dir]);
 
     }
-
+    
+    // Successful exit status of program
     return 0;
 }
 
