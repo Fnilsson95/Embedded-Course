@@ -1,5 +1,6 @@
 #include <stdio.h> 
 #include <ctype.h>
+#include <stdlib.h>
 
 
 // TODO
@@ -35,13 +36,20 @@ void turn(ROBOT *robot);
 int main () {
 
     // Declare a variable named "robot" of type ROBOT
-    ROBOT robot;
+    // Allocate it dynamically on the heap
+    ROBOT *robotPtr = (ROBOT *) malloc(sizeof(ROBOT));
+    
+    // Validate that pointer doesn't return NULL and was allocated correctly
+    if(robotPtr == NULL) {
+        printf("Error: Failed to allocate memory for robot.\n");
+        return 1;
+    }
 
     // Initialize directionNames array to translate enum values into actual strings.
     const char *directionNames[] = {"North", "East", "South", "West"};
 
     // Set the initial starting direction of the robot
-    robot.dir = N;
+    robotPtr->dir = N;
 
     // Initialize variables to control the program
     char inputInstructions[100];
@@ -53,10 +61,10 @@ int main () {
 
         // Prompt user for input coordinates
         printf("Enter the starting position of the robot (Positions for x and y 0-99)\n");
-        scanf("%d %d", &robot.xpos, &robot.ypos);
+        scanf("%d %d", &robotPtr->xpos, &robotPtr->ypos);
     
         // Validate input coordinates to be within correct range. 
-        if (robot.xpos > MAX_COORDINATES || robot.xpos < MIN_COORDINATES || robot.ypos > MAX_COORDINATES || robot.ypos < MIN_COORDINATES) {
+        if (robotPtr->xpos > MAX_COORDINATES || robotPtr->xpos < MIN_COORDINATES || robotPtr->ypos > MAX_COORDINATES || robotPtr->ypos < MIN_COORDINATES) {
             printf("Error, coordinates out of bounds. Please input between 0-99\n");
             continue;
         }
@@ -93,19 +101,21 @@ int main () {
         // We can also validate for letters that are not equal to t or m, but easier to do it inside for-loop. 
         for (int i = 0; inputInstructions[i] != '\0'; i++) {
             if (inputInstructions[i] == 't') {
-                turn(&robot);
+                turn(robotPtr);
             } else if (inputInstructions[i] == 'm') {
-                move(&robot);
+                move(robotPtr);
             }
         }
 
 
         // Print the final position/direction of robot
-        printf("The final position of the robot is x position: %d, and y position: %d\n", robot.xpos, robot.ypos);
-        printf("The final direction of the robot is: %s\n", directionNames[robot.dir]);
+        printf("The final position of the robot is x position: %d, and y position: %d\n", robotPtr->xpos, robotPtr->ypos);
+        printf("The final direction of the robot is: %s\n", directionNames[robotPtr->dir]);
 
     }
     
+    free(robotPtr);
+
     // Successful exit status of program
     return 0;
 }
